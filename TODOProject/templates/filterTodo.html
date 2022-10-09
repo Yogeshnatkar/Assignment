@@ -1,0 +1,41 @@
+{% if todo_list %}
+<table class="table">
+    <thead>
+    <tr>
+        <th>Subject</th>
+        <th>#</th>
+        <th>#</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in todo_list %}
+        <tr>
+            <td>
+                <p style="{% if i.isCompleted %} text-decoration: line-through {% endif %}">{{ i.desc }}</p>
+                <p>
+                    {% if not i.isCompleted %}
+                    Task Date : {{ i.completeAt }}
+                        {% else %}
+                        Completed Date : {{ i.taskCompletedDate }}
+                    {% endif %}
+                </p>
+            </td>
+            {% if not i.isCompleted and not all %}
+                <td class="text-right">
+                    <button onclick="competedToDo({{ i.id }})" class="btn btn-success">Mark Completed</button>
+                </td>
+                <td class="text-right">
+                    <button onclick="deleteToDo({{ i.id }})" class="btn btn-danger">Delete</button>
+                </td>
+            {% else %}
+                <td></td>
+                <td></td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    {% else %}
+    <br>
+    <h4 class="m-t-15 text-center">Sorry we not found task for you</h4>
+{% endif %}
